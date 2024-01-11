@@ -1,0 +1,72 @@
+label_prefixes:
+  tfmigrate: "migrate:"
+skip_create_pr: true
+
+target_groups:
+- working_directory: terraform/environments/production
+  target: production
+  gcs_bucket_name_plan_file: 'terraform_someservice-production'
+  gcs_bucket_name_tfmigrate_history: 'terraform_someservice-production'
+  terraform_plan_config:
+    gcp_service_account: terraform@someservice-production.iam.gserviceaccount.com
+    gcp_workload_identity_provider: projects/885386083056/locations/global/workloadIdentityPools/terraform-pool/providers/terraform-gh-provider
+  tfmigrate_plan_config:
+    gcp_service_account: terraform@someservice-production.iam.gserviceaccount.com
+    gcp_workload_identity_provider: projects/885386083056/locations/global/workloadIdentityPools/terraform-pool/providers/terraform-gh-provider
+  terraform_apply_config:
+    gcp_service_account: terraform@someservice-production.iam.gserviceaccount.com
+    gcp_workload_identity_provider: projects/885386083056/locations/global/workloadIdentityPools/terraform-pool/providers/terraform-gh-provider
+  tfmigrate_apply_config:
+    gcp_service_account: terraform@someservice-production.iam.gserviceaccount.com
+    gcp_workload_identity_provider: projects/885386083056/locations/global/workloadIdentityPools/terraform-pool/providers/terraform-gh-provider
+  secrets:
+  - env_name: TF_VAR_someservice_api_db_credential
+    secret_name: TF_VAR_someservice_API_DB_CREDENTIAL
+  - env_name: TF_VAR_someservice_api_encryption_key
+    secret_name: TF_VAR_someservice_API_ENCRYPTION_KEY
+  - env_name: TF_VAR_argo_cd_github_repo
+    secret_name: TF_VAR_ARGO_CD_GITHUB_REPO
+  - env_name: TF_VAR_argo_cd_dex_github
+    secret_name: TF_VAR_ARGO_CD_DEX_GITHUB
+  - env_name: TF_VAR_argocd_image_updater_token
+    secret_name: TF_VAR_ARGOCD_IMAGE_UPDATER_TOKEN
+  - env_name: TF_VAR_google_ads_developer_credentials
+    secret_name: TF_VAR_GOOGLE_ADS_DEVELOPER_CREDENTIALS
+  - env_name: TF_VAR_yahoo_offline_conversion_developer_credentials
+    secret_name: TF_VAR_YAHOO_OFFLINE_CONVERSION_DEVELOPER_CREDENTIALS
+  - env_name: TF_VAR_someservice_api_slack_api_token
+    secret_name: TF_VAR_RELT_API_SLACK_API_TOKEN
+
+- working_directory: terraform/environments/staging
+  target: staging
+  gcs_bucket_name_plan_file: 'terraform_someservice-staging'
+  gcs_bucket_name_tfmigrate_history: 'terraform_someservice-staging'
+  terraform_plan_config:
+    gcp_service_account: github-actions-manifests@someservice-staging.iam.gserviceaccount.com
+    gcp_workload_identity_provider: projects/34389937598/locations/global/workloadIdentityPools/oidc-pool/providers/github-actions-oidc
+  tfmigrate_plan_config:
+    gcp_service_account: github-actions-manifests@someservice-staging.iam.gserviceaccount.com
+    gcp_workload_identity_provider: projects/34389937598/locations/global/workloadIdentityPools/oidc-pool/providers/github-actions-oidc
+  terraform_apply_config:
+    gcp_service_account: github-actions-manifests@someservice-staging.iam.gserviceaccount.com
+    gcp_workload_identity_provider: projects/34389937598/locations/global/workloadIdentityPools/oidc-pool/providers/github-actions-oidc
+  tfmigrate_apply_config:
+    gcp_service_account: github-actions-manifests@someservice-staging.iam.gserviceaccount.com
+    gcp_workload_identity_provider: projects/34389937598/locations/global/workloadIdentityPools/oidc-pool/providers/github-actions-oidc
+  secrets:
+  - env_name: TF_VAR_someservice_api_db_credential
+    secret_name: TF_VAR_someservice_API_DB_CREDENTIAL
+  - env_name: TF_VAR_someservice_api_encryption_key
+    secret_name: TF_VAR_someservice_API_ENCRYPTION_KEY
+  - env_name: TF_VAR_argo_cd_github_repo
+    secret_name: TF_VAR_ARGO_CD_GITHUB_REPO
+  - env_name: TF_VAR_argo_cd_dex_github
+    secret_name: TF_VAR_ARGO_CD_DEX_GITHUB
+  - env_name: TF_VAR_argocd_image_updater_token
+    secret_name: TF_VAR_ARGOCD_IMAGE_UPDATER_TOKEN
+  - env_name: TF_VAR_google_ads_developer_credentials
+    secret_name: TF_VAR_GOOGLE_ADS_DEVELOPER_CREDENTIALS
+  - env_name: TF_VAR_yahoo_offline_conversion_developer_credentials
+    secret_name: TF_VAR_YAHOO_OFFLINE_CONVERSION_DEVELOPER_CREDENTIALS
+  - env_name: TF_VAR_someservice_api_slack_api_token
+    secret_name: TF_VAR_RELT_API_SLACK_API_TOKEN

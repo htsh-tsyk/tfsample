@@ -1,0 +1,5 @@
+project_id            = "someservice-staging"
+region                = "us-central1"
+zone                  = "us-central1-a"
+terraform_bucket      = "terraform_someservice-staging"
+getsomeservice_web_cname = "cname.vercel-dns.com."
